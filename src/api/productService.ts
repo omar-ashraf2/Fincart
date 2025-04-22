@@ -31,7 +31,7 @@ export async function fetchProducts(
     limit: limit.toString(),
   });
   if (categoryId) params.append("categoryId", categoryId.toString());
-  if (title) params.append("title", title); // API matches substrings
+  if (title) params.append("title", title);
 
   const items = await $get<Product[]>(`${BASE}/products?${params.toString()}`);
   return {

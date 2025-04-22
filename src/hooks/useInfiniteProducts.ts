@@ -11,14 +11,24 @@ export function useInfiniteProducts(filters: ProductFilters, limit = 12) {
     queryKey: ["products", limit, filters],
     initialPageParam: 0,
     queryFn: ({ pageParam }) =>
-      fetchProducts(pageParam, limit, filters.categoryId, filters.title),
+      fetchProducts(
+        pageParam,
+        limit,
+        filters.categoryId ?? undefined,
+        filters.title?.trim() || undefined
+      ),
     getNextPageParam: (last) => last.nextOffset,
     staleTime: 1000 * 60 * 5,
   });
 }
 
 export function useAllProducts(filters: ProductFilters, limit = 12) {
-  const q = useInfiniteProducts(filters, limit);
-  const products: Product[] = q.data?.pages.flatMap((p) => p.items) ?? [];
-  return { products, ...q };
+  const query = useInfiniteProducts(filters, limit);
+  const products: Product[] =
+    query.data?.pages.flatMap((page) => page.items) ?? [];
+
+  return {
+    products,
+    ...query,
+  };
 }
