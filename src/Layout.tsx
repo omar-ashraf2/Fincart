@@ -1,4 +1,5 @@
-import CartDrawer from "@/components/cart/CartDrawer";
+import Footer from "@/components/shared/Footer";
+import Header from "@/components/shared/Header";
 import { Outlet } from "react-router-dom";
 import { useCartStore } from "./stores/cartStore";
 
@@ -17,23 +18,5 @@ export default function Layout() {
         <Footer />
       </div>
     </>
-  );
-}
-
-function Header({ itemCount }: { itemCount: number }) {
-  return (
-    <header className="border-b">
-      <div className="container mx-auto flex items-center justify-between p-4">
-        <h1 className="text-xl font-bold">🛒 Fincart</h1>
-        <CartDrawer itemCount={itemCount} />
-      </div>
-    </header>
-  );
-}
-function Footer() {
-  return (
-    <footer className="border-t py-4 text-center text-sm">
-      © {new Date().getFullYear()} Omar Ashraf
-    </footer>
   );
 }
