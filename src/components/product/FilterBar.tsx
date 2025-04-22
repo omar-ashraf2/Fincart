@@ -18,13 +18,12 @@ export default function FilterBar({ onChange }: Props) {
 
   return (
     <div className="flex flex-col gap-4 sm:flex-row">
-      {/* Category select */}
       <select
         value={categoryId ?? ""}
         onChange={(e) =>
           setCategoryId(e.target.value ? Number(e.target.value) : null)
         }
-        className="border p-2 rounded"
+        className="border border-border rounded-md bg-background px-4 py-2 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
         disabled={isLoading}
       >
         <option value="">All categories</option>
@@ -35,13 +34,12 @@ export default function FilterBar({ onChange }: Props) {
         ))}
       </select>
 
-      {/* Search input */}
       <input
         type="search"
-        placeholder="Search products…"
+        placeholder="Search products..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="flex-1 border p-2 rounded"
+        className="flex-1 border border-border rounded-md bg-background px-4 py-2 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
       />
     </div>
   );
