@@ -6,7 +6,7 @@ export interface ProductFilters {
   title?: string;
 }
 
-export function useInfiniteProducts(filters: ProductFilters, limit = 10) {
+export function useInfiniteProducts(filters: ProductFilters, limit = 12) {
   return useInfiniteQuery({
     queryKey: ["products", limit, filters],
     initialPageParam: 0,
@@ -17,7 +17,7 @@ export function useInfiniteProducts(filters: ProductFilters, limit = 10) {
   });
 }
 
-export function useAllProducts(filters: ProductFilters, limit = 10) {
+export function useAllProducts(filters: ProductFilters, limit = 12) {
   const q = useInfiniteProducts(filters, limit);
   const products: Product[] = q.data?.pages.flatMap((p) => p.items) ?? [];
   return { products, ...q };
