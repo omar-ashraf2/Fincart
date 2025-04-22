@@ -1,4 +1,3 @@
-/*  src/components/cart/CartDrawer.tsx  */
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
