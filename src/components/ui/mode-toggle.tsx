@@ -17,7 +17,7 @@ export function ModeToggle() {
 
   return (
     <Button
-      variant="ghost"
+      variant="outline"
       size="icon"
       onClick={handleToggle}
       className={cn(
