@@ -1,9 +1,10 @@
 import { lazy } from "react";
+import { Navigate } from "react-router-dom";
 
-const Layout = lazy(() => import("../Layout"));
-const HomePage = lazy(() => import("../pages/HomePage"));
-const ErrorPage = lazy(() => import("../pages/ErrorPage"));
-const NotFoundPage = lazy(() => import("../pages/NotFoundPage.tsx"));
+const Layout = lazy(() => import("@/Layout"));
+const HomePage = lazy(() => import("@/pages/HomePage"));
+const ErrorPage = lazy(() => import("@/pages/ErrorPage"));
+const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 
 const routes = [
   {
@@ -11,15 +12,10 @@ const routes = [
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
-      {
-        index: true,
-        element: <HomePage />,
-      },
+      { index: true, element: <HomePage /> },
+      { path: "404", element: <NotFoundPage /> },
+      { path: "*", element: <Navigate to="/404" replace /> },
     ],
-  },
-  {
-    path: "*",
-    element: <NotFoundPage />,
   },
 ];
 

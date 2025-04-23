@@ -1,5 +1,9 @@
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
+import Spinner from "@/components/ui/Spinner";
+import ErrorPage from "@/pages/ErrorPage";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router-dom";
 import { useCartStore } from "./stores/cartStore";
 
@@ -8,15 +12,33 @@ export default function Layout() {
     useCartStore((s) => Object.values(s.items).reduce((n, i) => n + i.qty, 0));
   const itemCount = useCartCount();
 
-  return (
-    <>
-      <div className="min-h-screen flex flex-col">
+  const boundary = (ErrorBoundary as unknown) ? (
+    <ErrorBoundary FallbackComponent={ErrorPage}>
+      <Suspense fallback={<PageSpinner />}>
         <Header itemCount={itemCount} />
-        <main className="flex-1 container mx-auto p-4">
+        <main className="container flex flex-col py-8 min-h-[calc(100vh-theme(spacing.32))]">
           <Outlet />
         </main>
         <Footer />
-      </div>
-    </>
+      </Suspense>
+    </ErrorBoundary>
+  ) : (
+    <Suspense fallback={<PageSpinner />}>
+      <Header itemCount={itemCount} />
+      <main className="container flex flex-col py-8 min-h-[calc(100vh-theme(spacing.32))]">
+        <Outlet />
+      </main>
+      <Footer />
+    </Suspense>
+  );
+
+  return boundary;
+}
+
+function PageSpinner() {
+  return (
+    <div className="flex h-[60vh] items-center justify-center">
+      <Spinner />
+    </div>
   );
 }

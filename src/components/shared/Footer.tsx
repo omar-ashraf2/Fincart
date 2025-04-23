@@ -1,38 +1,32 @@
-import { GithubIcon, LinkedinIcon } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer
-      className="glass bg-background/70 border-t border-border shadow-inner backdrop-blur-md"
-      aria-label="Footer"
-    >
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between py-6 gap-4 text-sm text-muted-foreground">
+    <footer className="border-t border-border/50 bg-background">
+      <div className="container flex flex-col items-center justify-between gap-4 py-6 text-xs text-muted-foreground sm:flex-row">
         <p>© {new Date().getFullYear()} Omar Ashraf. All rights reserved.</p>
 
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4">
           <a
             href="https://github.com/omar-ashraf2"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-foreground transition-colors"
+            className="transition-colors hover:text-foreground"
             aria-label="GitHub"
           >
-            <GithubIcon className="h-5 w-5" />
+            <Github className="h-4 w-4" />
           </a>
-
           <a
             href="https://www.linkedin.com/in/omar-ashraf-338580182/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-foreground transition-colors"
             aria-label="LinkedIn"
+            className="transition-colors hover:text-foreground"
           >
-            <LinkedinIcon className="h-5 w-5" />
+            <Linkedin className="h-4 w-4" />
           </a>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
