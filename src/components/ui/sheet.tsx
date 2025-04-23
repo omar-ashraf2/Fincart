@@ -53,7 +53,7 @@ function SheetContent({
       <SheetOverlay />
       <SheetPrimitive.Content
         className={cn(
-          "fixed z-50 flex flex-col bg-[hsl(var(--sheet))] text-[hsl(var(--sheet-foreground))] shadow-2xl transition-all duration-500 ease-in-out",
+          "fixed z-50 flex flex-col bg-background shadow-2xl transition-all duration-500 ease-in-out",
           side === "right" &&
             "inset-y-0 right-0 h-full w-3/4 sm:max-w-sm",
           side === "left" &&
