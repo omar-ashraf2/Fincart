@@ -18,7 +18,7 @@ export function useInfiniteProducts(filters: ProductFilters, limit = 12) {
         filters.title?.trim() || undefined
       ),
     getNextPageParam: (last) => last.nextOffset,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60,
   });
 }
 
