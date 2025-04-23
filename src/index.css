@@ -99,3 +99,23 @@
     }
   }
 }
+@layer utilities {
+  @keyframes fly-to-cart {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    80% {
+      transform: translate(var(--dx), var(--dy)) scale(0.4);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate(var(--dx), var(--dy)) scale(0.2);
+      opacity: 0;
+    }
+  }
+  .fly-img {
+    @apply pointer-events-none fixed z-[9999] rounded-md overflow-hidden;
+    animation: fly-to-cart 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+}

@@ -20,7 +20,7 @@ export default function CartDrawer({ itemCount }: { itemCount: number }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative">
+        <Button id="cart-icon" variant="ghost" size="icon" className="relative">
           <ShoppingCart className="h-6 w-6 text-foreground" />
           {itemCount > 0 && (
             <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-semibold shadow-md">
