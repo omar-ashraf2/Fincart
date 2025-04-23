@@ -12,7 +12,7 @@ export default function Header({ itemCount }: { itemCount: number }) {
         <img
           src={logo}
           alt="logo"
-          className="h-10 w-auto object-contain"
+          className="h-8 w-auto object-contain"
         />
 
         <div className="flex items-center gap-4">
