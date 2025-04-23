@@ -20,11 +20,7 @@ export default function CartDrawer({ itemCount }: { itemCount: number }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="relative focus:outline-none transition-transform hover:scale-110 active:scale-95"
-        >
+        <Button variant="ghost" size="icon" className="relative">
           <ShoppingCart className="h-6 w-6 text-foreground" />
           {itemCount > 0 && (
             <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-semibold shadow-md">
@@ -47,39 +43,39 @@ export default function CartDrawer({ itemCount }: { itemCount: number }) {
           </SheetDescription>
         </SheetHeader>
 
-        <div className="flex-1 overflow-y-auto px-6 py-4 space-y-6">
-          {items.length > 0 ? (
+        <div className="flex-1 space-y-6 overflow-y-auto px-6 py-4">
+          {items.length ? (
             items.map((it) => (
               <div
                 key={it.id}
-                className="flex gap-4 p-2 rounded-lg bg-muted/50 hover:bg-muted transition-all group animate-in fade-in-50 duration-500"
+                className="group flex gap-4 rounded-lg bg-muted p-2 transition-colors"
               >
                 <img
                   src={it.image}
                   alt={it.title}
-                  className="w-16 h-16 rounded-lg object-cover shadow-md transition-transform group-hover:scale-105"
+                  className="h-16 w-16 rounded-lg object-cover shadow-md transition-transform group-hover:scale-105"
                 />
                 <div className="flex-1">
-                  <p className="text-sm font-semibold text-foreground line-clamp-2">
+                  <p className="line-clamp-2 text-sm font-semibold">
                     {it.title}
                   </p>
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="mt-1 text-xs text-muted-foreground">
                     {it.qty} × ${it.price}
                   </p>
                 </div>
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-8 w-8 text-destructive hover:bg-destructive/10 transition-colors"
                   onClick={() => remove(it.id)}
+                  className="h-8 w-8 text-destructive hover:bg-destructive/10"
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </div>
             ))
           ) : (
-            <div className="flex flex-col items-center justify-center mt-20 space-y-4">
-              <ShoppingCart className="h-12 w-12 text-muted-foreground transition-colors" />
+            <div className="mt-20 flex flex-col items-center space-y-4">
+              <ShoppingCart className="h-12 w-12 text-muted-foreground" />
               <p className="text-center text-sm text-muted-foreground">
                 Your cart is empty. Let’s fix that! 🛍️
               </p>
@@ -88,23 +84,17 @@ export default function CartDrawer({ itemCount }: { itemCount: number }) {
         </div>
 
         {count > 0 && (
-          <SheetFooter className="px-6 py-4 space-y-4">
-            <div className="flex justify-between text-base font-semibold text-foreground">
+          <SheetFooter className="space-y-4 px-6 py-4">
+            <div className="flex justify-between text-base font-semibold">
               <span>Subtotal</span>
               <span>${total.toFixed(2)}</span>
             </div>
             <div className="flex gap-2">
-              <Button
-                variant="secondary"
-                className="flex-1 hover:opacity-80 transition"
-                onClick={clear}
-              >
+              <Button variant="secondary" className="flex-1" onClick={clear}>
                 Clear
               </Button>
               <SheetClose asChild>
-                <Button className="flex-1 hover:opacity-90 transition">
-                  Checkout
-                </Button>
+                <Button className="flex-1">Checkout</Button>
               </SheetClose>
             </div>
           </SheetFooter>

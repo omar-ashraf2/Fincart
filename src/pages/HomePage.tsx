@@ -9,8 +9,8 @@ const HomePage = () => {
   const handleChange = useCallback((f: ProductFilters) => setFilters(f), []);
 
   return (
-    <section className="space-y-8 max-w-7xl mx-auto px-4">
-      <h2 className="text-2xl font-bold tracking-tight">Products</h2>
+    <section className="container space-y-8">
+      <h2 className="text-3xl text-center font-bold font-mono tracking-tight text-primary">Products</h2>
       <FilterBar onChange={handleChange} />
       <ProductGrid filters={filters} />
     </section>

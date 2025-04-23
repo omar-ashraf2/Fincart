@@ -1,7 +1,3 @@
-import { useCategories } from "@/hooks/useCategories";
-import { useEffect, useState } from "react";
-import { useDebounce } from "use-debounce";
-
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -10,6 +6,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useCategories } from "@/hooks/useCategories";
+import { useEffect, useState } from "react";
+import { useDebounce } from "use-debounce";
 
 interface Props {
   onChange: (filters: { categoryId?: number | null; title?: string }) => void;
@@ -22,31 +21,28 @@ export default function FilterBar({ onChange }: Props) {
   const [debouncedSearch] = useDebounce(search, 500);
 
   useEffect(() => {
-    const filters = {
+    onChange({
       categoryId: categoryId ?? undefined,
       title: debouncedSearch || undefined,
-    };
-
-    onChange(filters);
+    });
   }, [categoryId, debouncedSearch, onChange]);
 
   return (
     <div className="flex flex-col gap-4 sm:flex-row">
       <Select
-        value={categoryId !== null ? categoryId.toString() : "all"}
-        onValueChange={(value) => {
-          setCategoryId(value === "all" ? null : Number(value));
-        }}
+        value={categoryId !== null ? String(categoryId) : "all"}
+        onValueChange={(v) => setCategoryId(v === "all" ? null : Number(v))}
         disabled={isLoading}
       >
         <SelectTrigger className="w-full sm:w-48">
           <SelectValue placeholder="All categories" />
         </SelectTrigger>
-        <SelectContent className="bg-[hsl(var(--background))] text-[hsl(var(--sheet-foreground))] border border-border shadow-md rounded-md">
+
+        <SelectContent className="border border-border shadow-md">
           <SelectItem value="all">All categories</SelectItem>
-          {categories?.map((category) => (
-            <SelectItem key={category.id} value={category.id.toString()}>
-              {category.name}
+          {categories?.map((c) => (
+            <SelectItem key={c.id} value={String(c.id)}>
+              {c.name}
             </SelectItem>
           ))}
         </SelectContent>
@@ -54,7 +50,7 @@ export default function FilterBar({ onChange }: Props) {
 
       <Input
         type="search"
-        placeholder="Search products..."
+        placeholder="Search products…"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="flex-1"
